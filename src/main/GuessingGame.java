@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class GuessingGame {
+    private final int randomNumber =new Random().nextInt(10)+1;
 
     public String guess(int guessedNumber) {
 
@@ -8,7 +9,6 @@ public class GuessingGame {
     }
 
     public int getRandomNumber() {
-        int randomNumber = 0;
         return randomNumber;
     }
 }
