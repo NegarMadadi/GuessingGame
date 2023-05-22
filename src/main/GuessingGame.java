@@ -1,6 +1,5 @@
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GuessingGame {
     private final int randomNumber = new Random().nextInt(10) + 1;
@@ -17,7 +16,16 @@ public class GuessingGame {
         } else if (counter > 4 && guessedNumber != getRandomNumber()) {
             response = "Sorry, you are limited to only 4 tries.Your game is over!";
         } else {
-            response = guessedNumber == getRandomNumber() ? winningMsg : "You didn't get it";
+            String tooLowHighText = null;
+            if (guessedNumber < getRandomNumber()) {
+                tooLowHighText = "- You're too low";
+            } else if (guessedNumber > getRandomNumber()) {
+                tooLowHighText = "- You're too high";
+            } else {
+                tooLowHighText = "";
+            }
+            String loseText = String.format("You didn't get it %s", tooLowHighText);
+            response = guessedNumber == getRandomNumber() ? winningMsg : loseText;
         }
         return response;
     }

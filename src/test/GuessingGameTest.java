@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GuessingGameTest {
 
@@ -23,14 +24,14 @@ public class GuessingGameTest {
     @Test
     public void testOneWrongNegGuessSituation() {
         String message = game.guess(-5);
-        assertEquals("You didn't get it", message);
+        assertEquals("You didn't get it - You're too low", message);
     }
 
     @Test
     public void testOneWrongPosSituation() {
         int randomNum = game.getRandomNumber();
         String message = game.guess(randomNum + 1);
-        assertEquals("You didn't get it", message);
+        assertEquals("You didn't get it - You're too high", message);
     }
 
 
@@ -52,14 +53,16 @@ public class GuessingGameTest {
     }
 
     @Test
-    public void testFourWrongGuesses(){
+    public void testFourWrongGuesses() {
         game.guess(-3);
         game.guess(-3);
         game.guess(-3);
         String message = game.guess(-3);
         assertEquals("You didn't get it and you've had 4 tries. Game Over!", message);
-    }  @Test
-    public void testTenWrongGuesses(){
+    }
+
+    @Test
+    public void testTenWrongGuesses() {
         game.guess(-3);
         game.guess(-3);
         game.guess(-3);
@@ -72,17 +75,21 @@ public class GuessingGameTest {
         String message = game.guess(-3);
         assertEquals("Sorry, you are limited to only 4 tries.Your game is over!", message);
     }
+
     @Test
-    public void testThreeWrongGuessesAndOneCorrect(){
+    public void testThreeWrongGuessesAndOneCorrect() {
         game.guess(-3);
         game.guess(-3);
         game.guess(-3);
         int correctAnswer = game.getRandomNumber();
         String message = game.guess(correctAnswer);
         assertEquals("You got it in 4 tries", message);
+        assertTrue(message.contains("4"), "Should indicate 4 tries");
+        assertTrue(message.contains("You got it"), "Should indicate that we got the right number ");
     }
+
     @Test
-    public void testTwoWrongGuessesAndTwoCorrect(){
+    public void testTwoWrongGuessesAndTwoCorrect() {
         game.guess(-3);
         game.guess(-3);
         int correctAnswer = game.getRandomNumber();
